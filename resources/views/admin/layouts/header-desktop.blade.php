@@ -36,7 +36,8 @@
                                         <h5 class="name">
                                             <a href="#">Admin</a>
                                         </h5>
-                                        <span class="email">{{ $admin_details[0]->email }}</span>
+
+                                        <span class="email">admin@gmail.com</span>
                                     </div>
                                 </div>
                                 <div class="account-dropdown__body">

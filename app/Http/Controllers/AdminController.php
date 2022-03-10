@@ -58,8 +58,7 @@ class AdminController extends Controller
         $result['category_count'] = DB::table('categories')->where(['status'=>1])->get()->count();
         $result['products_count'] = DB::table('products')->where(['status'=>1])->get()->count();
         $result['coupons_count'] = DB::table('coupons')->where(['status'=>1])->get()->count();
-        $result['admin_details']=Admin::where(['id'=>session()->get('ADMIN_ID')])->get();
-        //print_r($result['admin_details'][0]->email);exit;
+        // $result['admin_details']=Admin::where(['id'=>session()->get('ADMIN_ID')])->get();
         return view('admin.dashboard',$result);
     }
 
