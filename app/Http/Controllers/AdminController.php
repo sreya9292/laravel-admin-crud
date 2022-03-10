@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -54,6 +55,9 @@ class AdminController extends Controller
     public function dashboard()
     {
         $result['page_title'] = 'Dashboard';
+        $result['category_count'] = DB::table('categories')->where(['status'=>1])->get()->count();
+        $result['products_count'] = DB::table('products')->where(['status'=>1])->get()->count();
+        $result['coupons_count'] = DB::table('coupons')->where(['status'=>1])->get()->count();
         return view('admin.dashboard',$result);
     }
 
