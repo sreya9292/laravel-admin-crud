@@ -222,9 +222,19 @@
                                 <div class="form-group">
                                     <div class="row">
 
+                                        {{-- <div class="col-md-2">
+                                            <label for="sku" class="control-label mb-1">SKU</label>
+                                            <input type="text" id="sku"  name="sku[]"  value={{ $pArr['sku']  }} class="form-control" aria-required="true" aria-invalid="false" required>
+                                            @error('sku')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div> --}}
+
                                         <div class="col-md-2">
                                             <label for="sku" class="control-label mb-1">SKU</label>
-                                            <input id="sku"  name="sku[]" type="text" value={{ $pArr['sku']  }} class="form-control" aria-required="true" aria-invalid="false" required>
+                                            <input id="sku" value="{{ $pArr['sku'] }}" name="sku[]" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                             @error('sku')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -234,7 +244,7 @@
 
                                         <div class="col-md-2">
                                             <label for="mrp" class="control-label mb-1">MRP</label>
-                                            <input id="mrp"  name="mrp[]" type="text" value={{ $pArr['mrp']  }} class="form-control" aria-required="true" aria-invalid="false" required>
+                                            <input id="mrp" value="{{ $pArr['mrp'] }}" name="mrp[]" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                             @error('mrp')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -244,7 +254,7 @@
 
                                         <div class="col-md-2">
                                             <label for="price" class="control-label mb-1">Price</label>
-                                            <input id="price"  name="price[]" type="text" value={{ $pArr['price']  }} class="form-control" aria-required="true" aria-invalid="false" required>
+                                            <input id="price" value="{{ $pArr['price'] }}" name="price[]" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                             @error('price')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -254,7 +264,7 @@
 
                                         <div class="col-md-3">
                                             <label for="size_id" class="control-label mb-1">Size</label>
-                                            <select id="size_id"  name="size_id[]" value={{ $pArr['sku']  }} class="form-control" aria-required="true" aria-invalid="false" >
+                                            <select id="size_id"  name="size_id[]"  class="form-control" aria-required="true" aria-invalid="false" >
                                                 <option value="">Select Size</option>
                                                 @foreach ($sizes as $list)
                                                     @if($pArr['size_id']==$list->id)
@@ -271,7 +281,6 @@
                                             </div>
                                             @enderror
                                         </div>
-
 
                                         <div class="col-md-3">
                                             <label for="color_id" class="control-label mb-1">Color</label>
@@ -295,13 +304,14 @@
 
                                         <div class="col-md-2">
                                             <label for="qty" class="control-label mb-1">Qty</label>
-                                            <input id="qty"  name="qty[]" type="text" value={{ $pArr['qty']  }} class="form-control" aria-required="true" aria-invalid="false" required>
+                                            <input id="qty" value="{{ $pArr['qty'] }}" name="qty[]" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                             @error('qty')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
                                             @enderror
                                         </div>
+
 
                                         <div class="col-md-4">
                                             <label for="attr_image" class="control-label mb-1">Image</label>
