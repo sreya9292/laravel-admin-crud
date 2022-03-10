@@ -329,7 +329,6 @@
 
 
                 <h4>Product Images</h4><br>
-
                 <div class="row" >
                     <div class="col-lg-12" >
 
