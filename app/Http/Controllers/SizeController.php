@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Size;
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
 use App\Models\Size;
 use Illuminate\Http\Request;
 

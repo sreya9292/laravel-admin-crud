@@ -27,7 +27,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('category.manage_category_process') }}" method="post">
+                            <form action="{{ route('category.manage_category_process') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="category_name">Category</label>
@@ -51,9 +51,32 @@
                                         </div>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="category_image">Category Image</label>
+                                    <input id="category_image" name="category_image" type="file" class="form-control" aria-required="true"
+                                        aria-invalid="false"
+                                        @if ($id > 0) {{ $image_required = '' }}
+                                    @else
+                                        {{ $image_required = 'required' }} @endif>
+                                    @error('category_image')
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="is_home">Show In Home Page</label>
+                                    <input type="checkbox" name="is_home" value="on" @if($is_home==1) {{ $is_home_value }} @else {{ $is_home_value }} @endif>
+                                </div>
+
+
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
+
+                                <input type="hidden" name="id" value="{{ $id }}" />
+
                             </form>
                         </div>
                         <!-- /.card-body -->

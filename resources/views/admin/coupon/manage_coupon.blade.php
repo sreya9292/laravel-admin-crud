@@ -59,6 +59,8 @@
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
+                                <input type="hidden" name="id" value="{{ $id }}" />
+
                             </form>
                         </div>
                         <!-- /.card-body -->

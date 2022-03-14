@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Color;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Color;
 use Illuminate\Http\Request;
 
