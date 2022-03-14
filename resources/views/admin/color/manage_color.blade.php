@@ -1,15 +1,14 @@
-@extends('admin/layouts/main')
-@section('page_title','Manage Color')
-@section('color_select','active')
+@extends('admin/layouts/layout')
+@section('page_title', 'Color')
+@section('breadcrumb_title', 'Color')
+@section('color_select', 'active')
 @section('container')
-    <!-- MAIN CONTENT-->
-
-    <a href="{{ url('admin/color') }}"><button type="button" class="btn btn-success">Back</button></a>
-    <div class="row m-t-30">
-        <div class="col-md-12">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-                    @if(session('message'))
+                <div class="col-md-12">
+                    @if (session('message'))
                         <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
                             <span class="badge badge-pill badge-success">Success</span>
                             {{ session('message') }}
@@ -18,17 +17,18 @@
                             </button>
                         </div>
                     @endif
-                    <div class="card">
-                        {{-- <div class="card-header">Credit Card</div> --}}
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Color</h3>
+                            <a href="{{ url('admin/color') }}"><button type="button"
+                            class="btn btn-default" style="float: right;">Back</button></a>
+                        </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
-                            {{-- <div class="card-title">
-                                <h3 class="text-center title-2">Manage Category</h3>
-                            </div>
-                            <hr> --}}
-                            <form action="{{ route('color.manage_color_process') }}" method="post" >
+                            <form action="{{ route('color.manage_color_process') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="color" class="control-label mb-1">Color</label>
+                                    <label for="color" >Color</label>
                                     <input id="color" value="{{ $color }}" name="color" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
                                     @error('color')
                                     <div class="alert alert-danger" role="alert">
@@ -36,22 +36,16 @@
                                     </div>
                                     @enderror
                                 </div>
-
-                                <div>
-                                    <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                        Submit
-                                    </button>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
-
-                                <input type="hidden" name="id" value="{{ $id }}" />
                             </form>
                         </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-
-    <!-- END MAIN CONTENT-->
+    </section>
+    <!-- End Main content -->
 @endsection

@@ -1,15 +1,16 @@
-@extends('admin/layouts/main')
-@section('page_title','Manage Category')
-@section('category_select','active')
+@extends('admin/layouts/layout')
+@section('page_title', 'Category')
+@section('breadcrumb_title', 'Category')
+@section('category_select', 'active')
 @section('container')
-    <!-- MAIN CONTENT-->
-
-    <a href="{{ url('admin/category') }}"><button type="button" class="btn btn-success" >Back</button></a>
-    <div class="row m-t-30">
-        <div class="col-md-12">
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12">
-                    @if(session('message'))
+                <div class="col-md-12">
+
+
+                    @if (session('message'))
                         <div class="sufee-alert alert with-close alert-success alert-dismissible fade show">
                             <span class="badge badge-pill badge-success">Success</span>
                             {{ session('message') }}
@@ -18,50 +19,48 @@
                             </button>
                         </div>
                     @endif
-                    <div class="card">
-                        {{-- <div class="card-header">Credit Card</div> --}}
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Category</h3>
+                            <a href="{{ url('admin/category') }}"><button type="button"
+                            class="btn btn-default" style="float: right;">Back</button></a>
+                        </div>
+                        <!-- /.card-header -->
                         <div class="card-body">
-                            {{-- <div class="card-title">
-                                <h3 class="text-center title-2">Manage Category</h3>
-                            </div>
-                            <hr> --}}
-                            <form action="{{ route('category.manage_category_process') }}" method="post" >
+                            <form action="{{ route('category.manage_category_process') }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="category_name" class="control-label mb-1">Category</label>
-                                    <input id="category_name" value="{{ $category_name }}" name="category_name" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                    <label for="category_name">Category</label>
+                                    <input id="category_name" value="{{ $category_name }}" name="category_name"
+                                        type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                        required>
                                     @error('category_name')
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="category_slug" class="control-label mb-1">Category Slug</label>
-                                    <input id="category_slug" value="{{ $category_slug }}" name="category_slug" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                    <label for="category_slug">Category Slug</label>
+                                    <input id="category_slug" value="{{ $category_slug }}" name="category_slug"
+                                        type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                        required>
                                     @error('category_slug')
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ $message }}
-                                    </div>
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
-
-
-                                <div >
-                                    <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                        Submit
-                                    </button>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
-
-                                <input type="hidden" name="id" value="{{ $id }}" />
                             </form>
                         </div>
+                        <!-- /.card-body -->
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
-
-    <!-- END MAIN CONTENT-->
+    </section>
+    <!-- End Main content -->
 @endsection

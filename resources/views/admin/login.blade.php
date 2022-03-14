@@ -2,114 +2,90 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Title Page-->
-    <title>Login</title>
-
-    <!-- Fontfaces CSS-->
-    <link href="{{ asset('admin_assets/css/font-face.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/font-awesome-4.7/css/font-awesome.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/font-awesome-5/css/fontawesome-all.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/mdi-font/css/material-design-iconic-font.min.css') }}" rel="stylesheet" media="all">
-
-    <!-- Bootstrap CSS-->
-    <link href="{{ asset('admin_assets/vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
-
-    <!-- Vendor CSS-->
-    <link href="{{ asset('admin_assets/vendor/animsition/animsition.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/wow/animate.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/css-hamburgers/hamburgers.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/slick/slick.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">
-    <link href="{{ asset('admin_assets/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" media="all">
-
-    <!-- Main CSS-->
-    <link href="{{ asset('admin_assets/css/theme.css') }}" rel="stylesheet" media="all">
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="{{ asset('admin-assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="animsition">
-    <div class="page-wrapper">
-        <div class="page-content--bge5">
-            <div class="container">
-                <div class="login-wrap">
-                    <div class="login-content">
-                        <div class="login-logo">
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            {{-- <a href="#"><b>Admin</b>LTE</a> --}}
+            {{ Config::get('constants.SITE_NAME') }}
+        </div>
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
 
-                            <a href="admin">
-                                {{-- <img src="{{ asset('admin_assets/images/icon/logo.png') }}" alt="CoolAdmin"> --}}
-                                {{ Config::get('constants.SITE_NAME') }}
-                            </a>
+                <form action="{{ route('admin.auth') }}" method="post">
+                    @csrf
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
                         </div>
-                        <div class="login-form">
-                            <form action="{{ route('admin.auth') }}" method="post">
-                                @csrf
+                    @endif
 
-                                @if(session('error'))
-                                <div class="alert alert-danger" role="alert">
-                                    {{ session('error') }}
-                                </div>
-                                @endif
-
-
-                                <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password" required>
-                                </div>
-
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-
-
-
-
-                            </form>
-                            {{-- <div class="register-link">
-                                <p>
-                                    Don't you have account?
-                                    <a href="#">Sign Up Here</a>
-                                </p>
-                            </div> --}}
+                    <div class="input-group mb-3">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{-- <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div> --}}
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+
+                {{-- <div class="social-auth-links text-center mb-3">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                    </a>
+                </div> --}}
+
+                {{-- <p class="mb-1">
+                    <a href="forgot-password.html">I forgot my password</a>
+                </p>
+                <p class="mb-0">
+                    <a href="register.html" class="text-center">Register a new membership</a>
+                </p> --}}
             </div>
         </div>
-
     </div>
 
-    <!-- Jquery JS-->
-    <script src="{{ asset('admin_assets/vendor/jquery-3.2.1.min.js') }}"></script>
-    <!-- Bootstrap JS-->
-    <script src="{{ asset('admin_assets/vendor/bootstrap-4.1/popper.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>
-    <!-- Vendor JS       -->
-    <script src="{{ asset('admin_assets/vendor/slick/slick.min.js') }}">
-    </script>
-    <script src="{{ asset('admin_assets/vendor/wow/wow.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/animsition/animsition.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js') }}">
-    </script>
-    <script src="{{ asset('admin_assets/vendor/counter-up/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/counter-up/jquery.counterup.min.js') }}">
-    </script>
-    <script src="{{ asset('admin_assets/vendor/circle-progress/circle-progress.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/chartjs/Chart.bundle.min.js') }}"></script>
-    <script src="{{ asset('admin_assets/vendor/select2/select2.min.js') }}">
-    </script>
 
-    <!-- Main JS-->
-    <script src="{{ asset('admin_assets/js/main.js') }}"></script>
-
+    <script src="{{ asset('admin-assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/dist/js/adminlte.min.js') }}"></script>
 </body>
 
 </html>
-<!-- end document-->
