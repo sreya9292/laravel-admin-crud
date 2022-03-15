@@ -36,6 +36,7 @@ class CategoryController extends Controller
             $result['category_slug']='';
             $result['category_image'] = '';
             $result['is_home'] = '';
+            $result['is_home_value'] = '';
             $result['id']='';
         }
         return view('admin.category.manage_category',$result);

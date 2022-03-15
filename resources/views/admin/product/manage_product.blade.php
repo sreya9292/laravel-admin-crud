@@ -182,6 +182,72 @@
                                     @enderror
                                 </div>
 
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="is_promo">Is Promo</label>
+                                            <select id="is_promo" name="is_promo" class="form-control"
+                                                aria-required="true" aria-invalid="false" required>
+                                                <option value="">Select Any One</option>
+                                                <option value="1" @if($is_promo==1) selected @endif >Yes</option>
+                                                <option value="0" @if($is_promo==0) selected @endif  >No</option>
+                                            </select>
+                                            @error('is_promo')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="is_featured">Is Featured</label>
+                                            <select id="is_featured" name="is_featured" class="form-control"
+                                                aria-required="true" aria-invalid="false" required>
+                                                <option value="">Select Any One</option>
+                                                <option value="1" @if($is_featured==1) selected @endif >Yes</option>
+                                                <option value="0" @if($is_featured==0) selected @endif  >No</option>
+                                            </select>
+                                            @error('is_featured')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="is_trending">Is Trending</label>
+                                            <select id="is_trending" name="is_trending" class="form-control"
+                                                aria-required="true" aria-invalid="false" required>
+                                                <option value="">Select Any One</option>
+                                                <option value="1" @if($is_trending==1) selected @endif >Yes</option>
+                                                <option value="0" @if($is_trending==0) selected @endif  >No</option>
+                                            </select>
+                                            @error('is_trending')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label for="is_discounted">Is Discounted</label>
+                                            <select id="is_discounted" name="is_discounted" class="form-control"
+                                                aria-required="true" aria-invalid="false" required>
+                                                <option value="">Select Any One</option>
+                                                <option value="1" @if($is_discounted==1) selected @endif >Yes</option>
+                                                <option value="0" @if($is_discounted==0) selected @endif  >No</option>
+                                            </select>
+                                            @error('is_discounted')
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
                             </div>
 
                             <h4>Product Attributes</h4><br>

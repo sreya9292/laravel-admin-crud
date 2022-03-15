@@ -60,11 +60,22 @@
                     </a>
                 </li>
 
+
+
                 <li class="nav-item">
                     <a href="{{ url('admin/size') }}" class="nav-link @yield('size_select')">
                         <i class="nav-icon fas fa-window-maximize"></i>
                         <p>
                             Size
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/brand') }}" class="nav-link @yield('brand_select')">
+                        <i class="nav-icon fas fa-bold"></i>
+                        <p>
+                            Brand
                         </p>
                     </a>
                 </li>
@@ -79,14 +90,40 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('admin/tax') }}" class="nav-link @yield('tax_select')">
+                        <i class="nav-icon fas fa-percentage"></i>
+                        <p>
+                            Tax
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('admin/product') }}" class="nav-link @yield('product_select')">
-                        <i class="nav-icon fas fa-copy"></i>
+                        <i class="nav-icon fas fa-parking"></i>
                         <p>
                             Product
                         </p>
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ url('admin/customer') }}" class="nav-link @yield('customer_select')">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Customer
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ url('admin/home_banner') }}" class="nav-link @yield('home_banner_select')">
+                        <i class="nav-icon fas fa-images"></i>
+                        <p>
+                            Home Banner
+                        </p>
+                    </a>
+                </li>
 
             </ul>
         </nav>

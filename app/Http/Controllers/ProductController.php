@@ -31,6 +31,10 @@ class ProductController extends Controller
             $result['technical_specification'] = $arr['0']->technical_specification;
             $result['uses'] = $arr['0']->uses;
             $result['warranty'] = $arr['0']->warranty;
+            $result['is_promo'] = $arr['0']->is_promo;
+            $result['is_featured'] = $arr['0']->is_featured;
+            $result['is_trending'] = $arr['0']->is_trending;
+            $result['is_discounted'] = $arr['0']->is_discounted;
             $result['status'] = $arr['0']->status;
             $result['id'] = $arr['0']->id;
 
@@ -56,6 +60,10 @@ class ProductController extends Controller
             $result['technical_specification'] = '';
             $result['uses'] = '';
             $result['warranty'] = '';
+            $result['is_promo'] = '';
+            $result['is_featured'] = '';
+            $result['is_trending'] = '';
+            $result['is_discounted'] = '';
             $result['status'] = '';
             $result['id'] = 0;
 

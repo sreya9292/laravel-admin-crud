@@ -1,7 +1,7 @@
 @extends('admin/layouts/layout')
-@section('page_title', 'Category')
-@section('breadcrumb_title', 'Category')
-@section('category_select', 'active')
+@section('page_title', 'Home Banner')
+@section('breadcrumb_title', 'Home Banner')
+@section('home_banner_select', 'active')
 @section('container')
     <!-- Main content -->
     <section class="content">
@@ -20,9 +20,9 @@
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Category List</h3>
-                            <a href="{{ url('admin/category/manage_category') }}" ><button type="button" class="btn btn-default" style="float: right;">Add
-                                Category + </button></a>
+                            <h3 class="card-title">Banner List</h3>
+                            <a href="{{ url('admin/home_banner/manage_home_banner') }}" ><button type="button" class="btn btn-default" style="float: right;">Add
+                                Banner + </button></a>
 
                         </div>
                         <!-- /.card-header -->
@@ -31,9 +31,9 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Category Name</th>
-                                        <th>Category Slug</th>
-                                        <th>Category Image</th>
+                                        <th>Banner Image</th>
+                                        <th>Button Text</th>
+                                        <th>Button Link</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -42,32 +42,33 @@
                                     @foreach ($data as $list)
                                         <tr>
                                             <td>{{ $list->id }}</td>
-                                            <td>{{ $list->category_name }}</td>
-                                            <td>{{ $list->category_slug }}</td>
                                             <td>
                                                 @if ($list->category_image != '')
-                                                    <img src="{{ asset('storage/media/' . $list->category_image) }}" width="100px;"
+                                                    <img src="{{ asset('storage/media/banner/' . $list->image) }}" width="100px;"
                                                         height="100px;">
                                                 @endif
                                             </td>
+                                            <td>{{ $list->btn_text }}</td>
+                                            <td>{{ $list->btn_link }}</td>
+
                                             <td>
                                                 @if ($list->status == 1)
-                                                    <a href="{{ url('admin/category/status/0') }}/{{ $list->id }}"><button
+                                                    <a href="{{ url('admin/home_banner/status/0') }}/{{ $list->id }}"><button
                                                             type="button" class="btn btn-success">Active</button></a>
                                                 @elseif($list->status == 0)
-                                                    <a href="{{ url('admin/category/status/1') }}/{{ $list->id }}"><button
+                                                    <a href="{{ url('admin/home_banner/status/1') }}/{{ $list->id }}"><button
                                                             type="button" class="btn btn-warning">Deactive</button></a>
                                                 @endif
                                             </td>
                                             <td>
 
-                                                {{-- <a href="category/delete/{{ $list->id }}"><button type="button" class="btn btn-danger">Delete</button></a> --}}
-                                                {{-- <a href="{{ url('admin/category/manage_category/') }}/{{ $list->id }}"><button
+                                                {{-- <a href="home_banner/delete/{{ $list->id }}"><button type="button" class="btn btn-danger">Delete</button></a> --}}
+                                                {{-- <a href="{{ url('admin/home_banner/manage_home_banner/') }}/{{ $list->id }}"><button
                                                         type="button" class="btn btn-primary">Edit</button></a> --}}
-                                                <a href="{{ url('admin/category/manage_category/') }}/{{ $list->id }}" class="btn btn-outline-info btn-sm"><i class="fas fa-pencil-alt">
+                                                <a href="{{ url('admin/home_banner/manage_home_banner/') }}/{{ $list->id }}" class="btn btn-outline-info btn-sm"><i class="fas fa-pencil-alt">
                                                 </i></a>
 
-                                                <a href="{{ url('admin/category/delete/') }}/{{ $list->id }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash">
+                                                <a href="{{ url('admin/home_banner/delete/') }}/{{ $list->id }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash">
                                                 </i></a>
                                             </td>
                                         </tr>
@@ -76,9 +77,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Category Name</th>
-                                        <th>Category Slug</th>
-                                        <th>Category Image</th>
+                                        <th>Banner Image</th>
+                                        <th>Button Text</th>
+                                        <th>Button Link</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
