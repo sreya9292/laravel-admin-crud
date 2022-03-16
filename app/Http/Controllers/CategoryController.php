@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -64,11 +65,18 @@ class CategoryController extends Controller
             $msg = "Category inserted";
         }
         if($request->hasFile('category_image')){
+            if($request->post('id')>0){
+                $arrImage = Category::where(['id'=>$request->post('id')])->get();
+                if(Storage::exists('public/media/category/'.$arrImage[0]->category_image)){
+                    Storage::delete('public/media/category/'.$arrImage[0]->category_image);
+                }
+            }
+            $rand = rand('111111','999999');
             $filenameWithExt    = $request->file('category_image')->getClientOriginalName();
             $filename           = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension          = $request->file('category_image')->getClientOriginalExtension();
-            $fileNameToStore    = $filename.'_'.time().'.'.$extension;
-            $path               = $request->file('category_image')->storeAs('public/media', $fileNameToStore);
+            $fileNameToStore    = $rand.time().'.'.$extension;
+            $path               = $request->file('category_image')->storeAs('public/media/category/', $fileNameToStore);
             $model->category_image = $fileNameToStore ;
         }
 

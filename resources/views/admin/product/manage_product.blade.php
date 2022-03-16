@@ -60,6 +60,10 @@
                                         @if ($id > 0) {{ $image_required = '' }}
                                     @else
                                         {{ $image_required = 'required' }} @endif>
+                                    @if ($image != '')
+                                        <img src="{{ asset('storage/media/pro_image/' . $image) }}"
+                                            width="100px;" height="100px;">
+                                    @endif
                                     @error('image')
                                         <div class="alert alert-danger" role="alert">
                                             {{ $message }}
@@ -93,8 +97,18 @@
 
                                         <div class="col-md-4">
                                             <label for="brand">Brand</label>
-                                            <input id="brand" value="{{ $brand }}" name="brand" type="text"
-                                                class="form-control" aria-required="true" aria-invalid="false" required>
+                                            <select id="brand" name="brand" class="form-control"
+                                                aria-required="true" aria-invalid="false" required>
+                                                <option value="">Select Brand</option>
+                                                @foreach ($brands as $list)
+                                                    @if ($brand == $list->id)
+                                                        <option selected value="{{ $list->id }}">
+                                                        @else
+                                                        <option value="{{ $list->id }}">
+                                                    @endif
+                                                    {{ $list->brand_name }}</option>
+                                                @endforeach
+                                            </select>
                                             @error('brand')
                                                 <div class="alert alert-danger" role="alert">
                                                     {{ $message }}
@@ -117,7 +131,7 @@
 
                                 <div class="form-group">
                                     <label for="short_desc">Short Description</label>
-                                    <textarea id="short_desc" name="short_desc" type="text" class="form-control"
+                                    <textarea id="short_desc" name="short_desc" type="text" class="form-control summernote"
                                         aria-required="true" aria-invalid="false" required>{{ $short_desc }}</textarea>
                                     @error('short_desc')
                                         <div class="alert alert-danger" role="alert">
@@ -128,7 +142,7 @@
 
                                 <div class="form-group">
                                     <label for="desc">Description</label>
-                                    <textarea id="desc" name="desc" type="text" class="form-control" aria-required="true"
+                                    <textarea id="desc" name="desc" type="text" class="form-control summernote" aria-required="true"
                                         aria-invalid="false" required>{{ $desc }}</textarea>
                                     @error('desc')
                                         <div class="alert alert-danger" role="alert">
@@ -151,7 +165,7 @@
                                 <div class="form-group">
                                     <label for="technical_specification">Technical Specification</label>
                                     <textarea id="technical_specification" name="technical_specification" type="text"
-                                        class="form-control" aria-required="true" aria-invalid="false"
+                                        class="form-control summernote" aria-required="true" aria-invalid="false"
                                         required>{{ $technical_specification }}</textarea>
                                     @error('technical_specification')
                                         <div class="alert alert-danger" role="alert">
@@ -180,6 +194,41 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="lead_time">Lead time</label>
+                                            <input id="lead_time" value="{{ $lead_time }}" name="lead_time" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+                                            @error('lead_time')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="tax_id">Tax</label>
+                                            <select id="tax_id" name="tax_id" class="form-control"
+                                            aria-required="true" aria-invalid="false" required>
+                                                <option value="">Select tax</option>
+                                                @foreach ($taxes as $list)
+                                                    @if ($tax_id == $list->id)
+                                                        <option selected value="{{ $list->id }}">
+                                                        @else
+                                                        <option value="{{ $list->id }}">
+                                                    @endif
+                                                    {{ $list->tax_desc }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('tax_id')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -380,7 +429,7 @@
                                                                 class="form-control" aria-required="true"
                                                                 aria-invalid="false">
                                                             @if ($pArr['attr_image'] != '')
-                                                                <img src="{{ asset('storage/media/' . $pArr['attr_image']) }}"
+                                                                <img src="{{ asset('storage/media/product_attr_images/' . $pArr['attr_image']) }}"
                                                                     width="100px;" height="100px;">
                                                             @endif
                                                         </div>
@@ -436,7 +485,7 @@
                                                                 class="form-control" aria-required="true"
                                                                 aria-invalid="false">
                                                             @if ($pIArr['images'] != '')
-                                                                <img src="{{ asset('storage/media/' . $pIArr['images']) }}"
+                                                                <img src="{{ asset('storage/media/product_images/' . $pIArr['images']) }}"
                                                                     width="100px;" height="100px;">
                                                             @endif
                                                         </div>

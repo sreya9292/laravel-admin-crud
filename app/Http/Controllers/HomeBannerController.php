@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\HomeBanner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeBannerController extends Controller
 {
@@ -18,6 +19,8 @@ class HomeBannerController extends Controller
         if($id>0){
             $arr= HomeBanner::where(['id'=>$id])->get();
             $result['image'] = $arr['0']->image;
+            $result['title'] = $arr['0']->title;
+            $result['description'] = $arr['0']->description;
             $result['btn_txt'] = $arr['0']->btn_txt;
             $result['btn_link'] = $arr['0']->btn_link;
             if( $arr['0']->is_home==1){
@@ -32,6 +35,8 @@ class HomeBannerController extends Controller
 
         }else{
             $result['image']='';
+            $result['title'] = '';
+            $result['description'] = '';
             $result['btn_txt']='';
             $result['btn_link'] = '';
             $result['is_home'] = '';
@@ -50,8 +55,6 @@ class HomeBannerController extends Controller
         }
 
         $request->validate([
-            'btn_text'=>'required',
-            'btn_link'=>'required',
             'image'=>$image_validation
         ]);
 
@@ -64,15 +67,23 @@ class HomeBannerController extends Controller
         }
 
         if($request->hasFile('image')){
+            if($request->post('id')>0){
+                $arrImage = HomeBanner::where(['id'=>$request->post('id')])->get();
+                if(Storage::exists('public/media/banner/'.$arrImage[0]->image)){
+                    Storage::delete('public/media/banner/'.$arrImage[0]->image);
+                }
+            }
+            $rand = rand('111111','999999');
             $filenameWithExt    = $request->file('image')->getClientOriginalName();
             $filename           = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension          = $request->file('image')->getClientOriginalExtension();
-            $fileNameToStore    = $filename.'_'.time().'.'.$extension;
-            $path               = $request->file('image')->storeAs('public/media/', $fileNameToStore);
+            $fileNameToStore    = $rand.time().'.'.$extension;
+            $path               = $request->file('image')->storeAs('public/media/banner/', $fileNameToStore);
             $model->image = $fileNameToStore ;
         }
-
-        $model->btn_text = $request->post('btn_text');
+        $model->title = $request->post('title');
+        $model->description = $request->post('description');
+        $model->btn_txt = $request->post('btn_txt');
         $model->btn_link = $request->post('btn_link');
         $model->is_home = $request->has('is_home') ? 1 : 0;
         $model->status = 1;

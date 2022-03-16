@@ -69,6 +69,24 @@
     <script src="{{ asset('admin-assets/dist/js/adminlte.js') }}"></script>
     {{-- <script src="{{ asset('admin-assets/dist/js/demo.js') }}"></script> --}}
     <script src="{{ asset('admin-assets/dist/js/pages/dashboard.js') }}"></script>
+    <script>
+    $('.summernote').summernote({
+        toolbar:[
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video', 'hr','math']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
+        ],
+        height: 250,
+    });
+    </script>
 </body>
 
 </html>

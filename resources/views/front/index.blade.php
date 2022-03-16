@@ -7,65 +7,23 @@
                 <div class="seq-screen">
                     <ul class="seq-canvas">
                         <!-- single slide item -->
+
+                        @foreach($home_banner as $list)
                         <li>
                             <div class="seq-model">
-                                <img data-seq src="{{ asset('front-assets/img/slider/1.jpg') }}" alt="Men slide img" />
+                                <img data-seq src="{{ asset('storage/media/banner/'.$list->image) }}"  />
                             </div>
+
                             <div class="seq-title">
-                                <span data-seq>Save Up to 75% Off</span>
-                                <h2 data-seq>Men Collection</h2>
-                                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                                {{-- <span data-seq></span> --}}
+                                @if($list->title!='')<h2 data-seq>{{ $list->title }}</h2>@endif
+                                @if($list->description!='')<p data-seq>{{ $list->description }}</p>@endif
+                                @if($list->btn_txt!='')<a data-seq target="_blank" href="{{ $list->btn_link }}" class="aa-shop-now-btn aa-secondary-btn">{{ $list->btn_txt }}</a> @endif
                             </div>
+
                         </li>
-                        <!-- single slide item -->
-                        <li>
-                            <div class="seq-model">
-                                <img data-seq src="{{ asset('front-assets/img/slider/2.jpg') }}" alt="Wristwatch slide img" />
-                            </div>
-                            <div class="seq-title">
-                                <span data-seq>Save Up to 40% Off</span>
-                                <h2 data-seq>Wristwatch Collection</h2>
-                                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-                            </div>
-                        </li>
-                        <!-- single slide item -->
-                        <li>
-                            <div class="seq-model">
-                                <img data-seq src="{{ asset('front-assets/img/slider/3.jpg') }}" alt="Women Jeans slide img" />
-                            </div>
-                            <div class="seq-title">
-                                <span data-seq>Save Up to 75% Off</span>
-                                <h2 data-seq>Jeans Collection</h2>
-                                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-                            </div>
-                        </li>
-                        <!-- single slide item -->
-                        <li>
-                            <div class="seq-model">
-                                <img data-seq src="{{ asset('front-assets/img/slider/4.jpg') }}" alt="Shoes slide img" />
-                            </div>
-                            <div class="seq-title">
-                                <span data-seq>Save Up to 75% Off</span>
-                                <h2 data-seq>Exclusive Shoes</h2>
-                                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-                            </div>
-                        </li>
-                        <!-- single slide item -->
-                        <li>
-                            <div class="seq-model">
-                                <img data-seq src="{{ asset('front-assets/img/slider/5.jpg') }}" alt="Male Female slide img" />
-                            </div>
-                            <div class="seq-title">
-                                <span data-seq>Save Up to 50% Off</span>
-                                <h2 data-seq>Best Collection</h2>
-                                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-                            </div>
-                        </li>
+                        @endforeach
+
                     </ul>
                 </div>
                 <!-- slider navigation btn -->
@@ -92,7 +50,7 @@
                                     @foreach($home_categories as $key=>$val)
                                     <div class="aa-single-promo-right">
                                         <div class="aa-promo-banner">
-                                            <img src="{{ asset('storage/media/'.$val->category_image) }}" alt="img">
+                                            <img src="{{ asset('storage/media/category/'.$val->category_image) }}" alt="img">
                                             <div class="aa-prom-content">
                                                 <h4><a href="{{ url('category/'.$val->category_slug) }}">For {{ $val->category_name }}</a></h4>
                                             </div>
@@ -149,7 +107,7 @@
                                                     <li>
                                                         <figure>
                                                             <a class="aa-product-img" href="{{ url('product/'.$productArr->slug) }}"><img
-                                                                    src="{{ asset('storage/media/'. $productArr->image) }}" alt="polo shirt img"></a>
+                                                                    src="{{ asset('storage/media/pro_image/'. $productArr->image) }}" alt="polo shirt img"></a>
                                                             <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span
                                                                     class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                             <figcaption>
@@ -313,7 +271,7 @@
                                             <li>
                                                 <figure>
                                                     <a class="aa-product-img" href="{{ url('product/'.$productArr->slug) }}"><img
-                                                            src="{{ asset('storage/media/'. $productArr->image) }}" alt="polo shirt img"></a>
+                                                            src="{{ asset('storage/media/pro_image/'. $productArr->image) }}" alt="polo shirt img"></a>
                                                     <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span
                                                             class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                     <figcaption>
@@ -345,7 +303,7 @@
                                             <li>
                                                 <figure>
                                                     <a class="aa-product-img" href="{{ url('product/'.$productArr->slug) }}"><img
-                                                            src="{{ asset('storage/media/'. $productArr->image) }}" alt="polo shirt img"></a>
+                                                            src="{{ asset('storage/media/pro_image/'. $productArr->image) }}" alt="polo shirt img"></a>
                                                     <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span
                                                             class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                     <figcaption>
@@ -377,7 +335,7 @@
                                             <li>
                                                 <figure>
                                                     <a class="aa-product-img" href="{{ url('product/'.$productArr->slug) }}"><img
-                                                            src="{{ asset('storage/media/'. $productArr->image) }}" alt="polo shirt img"></a>
+                                                            src="{{ asset('storage/media/pro_image/'. $productArr->image) }}" alt="polo shirt img"></a>
                                                     <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span
                                                             class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                     <figcaption>
@@ -600,7 +558,7 @@
                     <div class="aa-client-brand-area">
                         <ul class="aa-client-brand-slider">
                             @foreach($home_brands as $list)
-                                <li><a href="#"><img src="{{ asset('storage/media/'.$list->brand_image) }}" alt="{{ $list->brand_name }} img"></a></li>
+                                <li><a href="#"><img src="{{ asset('storage/media/brand/'.$list->brand_image) }}" alt="{{ $list->brand_name }} img"></a></li>
                             @endforeach
                         </ul>
                     </div>

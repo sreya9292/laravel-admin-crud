@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
@@ -55,6 +54,7 @@ class FrontController extends Controller
                                                     ->where(['product_attr.products_id'=>$list1->id])
                                                     ->get();
         }
+        $result['home_banner'] = DB::table('home_banners')->where(['status'=>1])->where(['is_home'=>1])->get();
 
         return view('front.index',$result);
     }

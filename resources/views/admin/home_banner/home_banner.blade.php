@@ -43,12 +43,12 @@
                                         <tr>
                                             <td>{{ $list->id }}</td>
                                             <td>
-                                                @if ($list->category_image != '')
+                                                @if ($list->image != '')
                                                     <img src="{{ asset('storage/media/banner/' . $list->image) }}" width="100px;"
                                                         height="100px;">
                                                 @endif
                                             </td>
-                                            <td>{{ $list->btn_text }}</td>
+                                            <td>{{ $list->btn_txt }}</td>
                                             <td>{{ $list->btn_link }}</td>
 
                                             <td>

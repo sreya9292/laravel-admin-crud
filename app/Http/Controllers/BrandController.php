@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -61,11 +62,19 @@ class BrandController extends Controller
             $msg = "Brand inserted";
         }
         if($request->hasFile('brand_image')){
+            if($request->post('id')>0){
+                $arrImage = Brand::where(['id'=>$request->post('id')])->get();
+                if(Storage::exists('public/media/brand/'.$arrImage[0]->brand_image)){
+                    Storage::delete('public/media/brand/'.$arrImage[0]->brand_image);
+                }
+            }
+
+            $rand = rand('111111','999999');
             $filenameWithExt    = $request->file('brand_image')->getClientOriginalName();
             $filename           = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension          = $request->file('brand_image')->getClientOriginalExtension();
-            $fileNameToStore    = $filename.'_'.time().'.'.$extension;
-            $path               = $request->file('brand_image')->storeAs('public/media', $fileNameToStore);
+            $fileNameToStore    = $rand.time().'.'.$extension;
+            $path               = $request->file('brand_image')->storeAs('public/media/brand/', $fileNameToStore);
             $model->brand_image = $fileNameToStore ;
         }
 

@@ -14,12 +14,15 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
-        <div class="login-logo">
-            {{-- <a href="#"><b>Admin</b>LTE</a> --}}
-            {{ Config::get('constants.SITE_NAME') }}
-        </div>
-        <div class="card">
-            <div class="card-body login-card-body">
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <div class="login-logo">
+                    {{-- <img class="brand-img" src="<?php echo base_url('page-elements/admin/global/assets/images/logo.png');?>" alt="..." width="120"> --}}
+                    {{ Config::get('constants.SITE_NAME') }}
+                </div>
+            </div>
+
+            <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
                 <form action="{{ route('admin.auth') }}" method="post">

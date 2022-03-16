@@ -1,7 +1,7 @@
 @extends('admin/layouts/layout')
-@section('page_title', 'Product')
-@section('breadcrumb_title', 'Product')
-@section('product_select', 'active')
+@section('page_title', 'Customer')
+@section('breadcrumb_title', 'Customer')
+@section('customer_select', 'active')
 @section('container')
     <!-- Main content -->
     <section class="content">
@@ -20,10 +20,10 @@
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Product List</h3>
-                            <a href="{{ url('admin/product/manage_product') }}"><button type="button" class="btn btn-default"
+                            <h3 class="card-title">Customer List</h3>
+                            {{-- <a href="{{ url('admin/customer/manage_customer') }}"><button type="button" class="btn btn-default"
                                     style="float: right;">Add
-                                    Product + </button></a>
+                                    Size + </button></a> --}}
 
                         </div>
                         <!-- /.card-header -->
@@ -33,10 +33,10 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Slug</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
                                         <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,34 +44,23 @@
                                         <tr>
                                             <td>{{ $list->id }}</td>
                                             <td>{{ $list->name }}</td>
-                                            <td>{{ $list->slug }}</td>
+                                            <td>{{ $list->email }}</td>
+                                            <td>{{ $list->mobile }}</td>
                                             <td>
-                                                @if ($list->image != '')
-                                                    <img src="{{ asset('storage/media/pro_image/' . $list->image) }}" width="100px;"
-                                                        height="100px;">
-                                                @endif
-                                            </td>
-                                            <td>
+                                                <a href="{{ url('admin/customer/show/') }}/{{ $list->id }}" class="btn btn-outline-primary btn-sm"><i class="fas fa-eye"></i></a>
 
                                                 @if ($list->status == 1)
-                                                    <a href="{{ url('admin/product/status/0') }}/{{ $list->id }}"><button
+                                                    <a href="{{ url('admin/size/status/0') }}/{{ $list->id }}"><button
                                                             type="button" class="btn btn-success">Active</button></a>
                                                 @elseif($list->status == 0)
-                                                    <a href="{{ url('admin/product/status/1') }}/{{ $list->id }}"><button
+                                                    <a href="{{ url('admin/size/status/1') }}/{{ $list->id }}"><button
                                                             type="button" class="btn btn-warning">Deactive</button></a>
                                                 @endif
                                             </td>
-                                            <td>
-
-                                                {{-- <a href="product/delete/{{ $list->id }}"><button type="button" class="btn btn-danger">Delete</button></a> --}}
-
-                                                <a href="{{ url('admin/product/manage_product/') }}/{{ $list->id }}"
-                                                    class="btn btn-outline-info btn-sm"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-
-                                                <a href="{{ url('admin/product/delete/') }}/{{ $list->id }}"
-                                                    class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
-                                            </td>
+                                            {{-- <td>
+                                                <a href="{{ url('admin/size/manage_size/') }}/{{ $list->id }}" class="btn btn-outline-info btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                                <a href="{{ url('admin/size/delete/') }}/{{ $list->id }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -79,10 +68,10 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
-                                        <th>Slug</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
+                                        <th>Email</th>
+                                        <th>Mobile</th>
                                         <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </tfoot>
                             </table>

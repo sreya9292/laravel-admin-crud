@@ -48,7 +48,7 @@
                                         {{ $image_required = 'required' }} @endif>
 
                                     @if ($brand_image != '')
-                                        <img src="{{ asset('storage/media/' . $brand_image) }}"
+                                        <img src="{{ asset('storage/media/brand/' . $brand_image) }}"
                                             width="100px;" height="100px;">
                                     @endif
                                     @error('brand_image')

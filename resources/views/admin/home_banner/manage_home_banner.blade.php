@@ -30,6 +30,27 @@
                             <form action="{{ route('home_banner.manage_home_banner_process') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input id="title" value="{{ $title }}" name="title"
+                                        type="text" class="form-control" aria-required="true" aria-invalid="false"
+                                        required>
+                                    @error('title')
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea id="description" name="description" type="text" class="form-control"
+                                        aria-required="true" aria-invalid="false" required>{{ $description }}</textarea>
+                                    @error('description')
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="btn_txt">Button Text</label>
                                     <input id="btn_txt" value="{{ $btn_txt }}" name="btn_txt"
                                         type="text" class="form-control" aria-required="true" aria-invalid="false"

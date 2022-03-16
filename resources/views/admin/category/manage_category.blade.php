@@ -58,6 +58,10 @@
                                         @if ($id > 0) {{ $image_required = '' }}
                                     @else
                                         {{ $image_required = 'required' }} @endif>
+                                    @if ($category_image != '')
+                                        <img src="{{ asset('storage/media/category/' . $category_image) }}"
+                                            width="100px;" height="100px;">
+                                    @endif
                                     @error('category_image')
                                         <div class="alert alert-danger" role="alert">
                                             {{ $message }}

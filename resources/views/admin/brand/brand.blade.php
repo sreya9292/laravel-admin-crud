@@ -44,7 +44,7 @@
                                             <td>{{ $list->brand_name }}</td>
                                             <td>
                                                 @if ($list->brand_image != '')
-                                                    <img src="{{ asset('storage/media/' . $list->brand_image) }}" width="100px;"
+                                                    <img src="{{ asset('storage/media/brand/' . $list->brand_image) }}" width="100px;"
                                                         height="100px;">
                                                 @endif
                                             </td>
