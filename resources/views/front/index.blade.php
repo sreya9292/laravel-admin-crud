@@ -1,4 +1,5 @@
 @extends('front/layout')
+@section('page_title','Home Page')
 @section('container')
     <!-- Start slider -->
     <section id="aa-slider">
@@ -7,23 +8,19 @@
                 <div class="seq-screen">
                     <ul class="seq-canvas">
                         <!-- single slide item -->
-
                         @foreach($home_banner as $list)
                         <li>
                             <div class="seq-model">
                                 <img data-seq src="{{ asset('storage/media/banner/'.$list->image) }}"  />
                             </div>
-
                             <div class="seq-title">
                                 {{-- <span data-seq></span> --}}
                                 @if($list->title!='')<h2 data-seq>{{ $list->title }}</h2>@endif
                                 @if($list->description!='')<p data-seq>{{ $list->description }}</p>@endif
                                 @if($list->btn_txt!='')<a data-seq target="_blank" href="{{ $list->btn_link }}" class="aa-shop-now-btn aa-secondary-btn">{{ $list->btn_txt }}</a> @endif
                             </div>
-
                         </li>
                         @endforeach
-
                     </ul>
                 </div>
                 <!-- slider navigation btn -->
@@ -108,7 +105,7 @@
                                                         <figure>
                                                             <a class="aa-product-img" href="{{ url('product/'.$productArr->slug) }}"><img
                                                                     src="{{ asset('storage/media/pro_image/'. $productArr->image) }}" alt="polo shirt img"></a>
-                                                            <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span
+                                                            <a class="aa-add-card-btn" href="javascript:void(0)" onclick="home_add_to_cart('{{ $productArr->id }}','{{ $home_product_attr[$productArr->id][0]->size }}','{{ $home_product_attr[$productArr->id][0]->color }}')"><span
                                                                     class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                             <figcaption>
                                                                 <h4 class="aa-product-title"><a href="{{ url('product/'.$productArr->slug) }}">{{ $productArr->name }}</a></h4>
@@ -336,8 +333,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="{{ url('product/'.$productArr->slug) }}"><img
                                                             src="{{ asset('storage/media/pro_image/'. $productArr->image) }}" alt="polo shirt img"></a>
-                                                    <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span
-                                                            class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                    <a class="aa-add-card-btn" href="{{ url('product/'.$productArr->slug) }}"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="{{ url('product/'.$productArr->slug) }}">{{ $productArr->name }}</a></h4>
                                                         <span class="aa-product-price">Rs. {{ $home_discounted_product_attr[$productArr->id][0]->price }}</span><span
@@ -586,4 +582,48 @@
         </div>
     </section>
     <!-- / Subscribe section -->
+    <input type="hidden" id="qty" value="1" />
+    <form id="frmAddToCart">
+        <input type="hidden" id="size_id" name="size_id" />
+        <input type="hidden" id="color_id" name="color_id" />
+        <input type="hidden" id="pqty" name="pqty" />
+        <input type="hidden" id="product_id" name="product_id" />
+        @csrf
+    </form>
 @endsection
+
+<script>
+    function home_add_to_cart(id,size_str_id,color_str_id){
+        $('#color_id').val(color_str_id);
+        $('#size_id').val(size_str_id);
+        add_to_cart(id,size_str_id,color_str_id);
+    }
+
+    function add_to_cart(id,size_str_id,color_str_id){
+        $('#add_to_cart_msg').html('');
+        var color_id = $('#color_id').val();
+        var size_id = $('#size_id').val();
+        if(size_str_id==0 && color_str_id==0){
+            size_id  = 'no';
+            color_id = 'no';
+        }
+        if(size_id=='' && size_id!='no'){
+            $('#add_to_cart_msg').html('<div class="alert alert-danger fade in alert-dismissable" style="margin-top:10px"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>Please Select Size</div>');
+        }else if(color_id=='' && color_id!='no'){
+            $('#add_to_cart_msg').html('<div class="alert alert-danger fade in alert-dismissable" style="margin-top:10px" ><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>Please Select Color</div>');
+        }else{
+            $('#product_id').val(id);
+            $('#pqty').val($('#qty').val());
+            jQuery.ajax({
+                url:'/add_to_cart',
+                data:jQuery('#frmAddToCart').serialize(),
+                type:'post',
+                success:function(result){
+                    console.log(result);
+                    alert('Product '+result.msg);
+                }
+            });
+        }
+
+    }
+</script>

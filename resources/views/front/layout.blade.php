@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Daily Shop | Home</title>
+    <title>@yield('page_title')</title>
     <link href="{{ asset('front-assets/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('front-assets/css/jquery.smartmenus.bootstrap.css') }}" rel="stylesheet">
@@ -94,7 +94,7 @@
                                 <ul class="aa-head-top-nav-right">
                                     <li><a href="javascript:void(0)">My Account</a></li>
                                     <li class="hidden-xs"><a href="javascript:void(0)">Wishlist</a></li>
-                                    <li class="hidden-xs"><a href="javascript:void(0)">My Cart</a></li>
+                                    <li class="hidden-xs"><a href="{{ url('/cart') }}">My Cart</a></li>
                                     <li class="hidden-xs"><a href="javascript:void(0)">Checkout</a></li>
                                     <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
                                 </ul>
@@ -198,7 +198,6 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <!-- Left nav -->
-
                         {!! getTopNavCat() !!}
 
                     </div>

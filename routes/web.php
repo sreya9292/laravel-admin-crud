@@ -28,6 +28,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/',[FrontController::class,'index']);
+Route::get('product/{slug}',[FrontController::class,'product']);
+Route::post('add_to_cart',[FrontController::class,'add_to_cart']);
+Route::get('cart',[FrontController::class,'cart']);
+
 Route::get('admin',[AdminController::class,'index']);
 Route::post('admin/auth',[AdminController::class,'auth'])->name('admin.auth');
 
