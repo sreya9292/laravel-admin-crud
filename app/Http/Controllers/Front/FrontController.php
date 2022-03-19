@@ -116,8 +116,14 @@ class FrontController extends Controller
         $check=DB::table('cart')->where(['user_id' => $uid])->where(['user_type' => $user_type])->where(['product_id' => $product_id])->where(['product_attr_id' =>$product_attr_id])->get();
         if(isset($check[0])){
             $update_id = $check[0]->id;
-            DB::table('cart')->where(['user_id' => $update_id])->update(['qty'=>$pqty]);
-            $msg = "Updated";
+            if($pqty==0){
+                DB::table('cart')->where(['user_id' => $update_id])->delete();
+                $msg = "Deleted";
+            }else{
+                DB::table('cart')->where(['user_id' => $update_id])->update(['qty'=>$pqty]);
+                $msg = "Updated";
+            }
+
         }else{
             $id = DB::table('cart')->insertGetId([
                 'user_id'=>$uid,
@@ -150,7 +156,10 @@ class FrontController extends Controller
         ->where(['user_type' => $user_type])
         ->select('cart.qty','products.name','products.image','sizes.size','colors.color','product_attr.price','products.slug','products.id as pid','product_attr.id as attr_id')
         ->get();
-       // pxr($result);
+
+     //pxr($result);
+
+
         return view('front.cart',$result);
     }
 }

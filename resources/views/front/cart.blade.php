@@ -42,8 +42,8 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($list as $data)
-                                                    <tr>
-                                                        <td><a class="remove" href="#">
+                                                    <tr id="cart_box{{ $data->attr_id }}">
+                                                        <td><a class="remove" href="javascript:void(0)" onclick="deleteCartProduct('{{ $data->pid }}','{{ $data->size }}','{{ $data->color }}','{{ $data->attr_id }}')" >
                                                                 <fa class="fa fa-close"></fa>
                                                             </a></td>
                                                         <td><a href="{{ url('product/'.$data->slug) }}"><img src="{{ asset('storage/media/pro_image/'.$data->image) }}" alt="img"></a>
@@ -57,8 +57,8 @@
                                                             @endif
                                                         </td>
                                                         <td>{{ $data->price }}</td>
-                                                        <td><input class="aa-cart-quantity" type="number" id="qty" value="{{ $data->qty }}" onchange="updateQty('{{ $data->pid }}','{{ $data->size }}','{{ $data->color }}')"></td>
-                                                        <td>Rs. {{ $data->price*$data->qty }}</td>
+                                                        <td><input class="aa-cart-quantity" type="number" id="qty{{ $data->attr_id }}" value="{{ $data->qty }}" onchange="updateQty('{{ $data->pid }}','{{ $data->size }}','{{ $data->color }}','{{ $data->attr_id }}','{{ $data->price }}')"></td>
+                                                        <td id="total_price_{{ $data->attr_id }}">Rs. {{ $data->price*$data->qty }}</td>
                                                     </tr>
                                                 @endforeach
                                                 <tr>
@@ -68,7 +68,7 @@
                                         </table>
                                     </div>
                                 @else
-                                    <h3>Data Not Found</h3>
+                                    <h3>Cart Empty</h3>
                                 @endif
                             </form>
                             <!-- Cart Total view -->
@@ -95,11 +95,60 @@
         </div>
     </section>
     <!-- / Cart view section -->
-
+    <input type="hidden" id="qty" name="qty" />
+    <form id="frmAddToCart">
+        <input type="hidden" id="size_id" name="size_id" />
+        <input type="hidden" id="color_id" name="color_id" />
+        <input type="hidden" id="pqty" name="pqty" />
+        <input type="hidden" id="product_id" name="product_id" />
+        @csrf
+    </form>
 @endsection
 
 <script>
-    function updateQty(){
+    function updateQty(pid,size,color,attr_id,price){
+        var qty = $('#qty'+attr_id).val();
+        $('#qty').val(qty);
+        $('#color_id').val(color);
+        $('#size_id').val(size);
+        add_to_cart(pid,size,color);
+        $('#total_price_'+attr_id).html('Rs.'+qty*price);
+    }
+
+    function deleteCartProduct(pid,size,color,attr_id){
+        var qty = $('#qty'+attr_id).val();
+        $('#qty').val(0);
+        $('#color_id').val(color);
+        $('#size_id').val(size);
+        add_to_cart(pid,size,color);
+        $('#cart_box'+attr_id).hide();
+    }
+
+    function add_to_cart(id,size_str_id,color_str_id){
+        $('#add_to_cart_msg').html('');
+        var color_id = $('#color_id').val();
+        var size_id = $('#size_id').val();
+        if(size_str_id==0 && color_str_id==0){
+            size_id  = 'no';
+            color_id = 'no';
+        }
+        if(size_id=='' && size_id!='no'){
+            $('#add_to_cart_msg').html('<div class="alert alert-danger fade in alert-dismissable" style="margin-top:10px"><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>Please Select Size</div>');
+        }else if(color_id=='' && color_id!='no'){
+            $('#add_to_cart_msg').html('<div class="alert alert-danger fade in alert-dismissable" style="margin-top:10px" ><a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">x</a>Please Select Color</div>');
+        }else{
+            $('#product_id').val(id);
+            $('#pqty').val($('#qty').val());
+            jQuery.ajax({
+                url:'/add_to_cart',
+                data:jQuery('#frmAddToCart').serialize(),
+                type:'post',
+                success:function(result){
+                    console.log(result);
+                    alert('Product '+result.msg);
+                }
+            });
+        }
 
     }
 </script>
